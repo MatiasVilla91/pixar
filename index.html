@@ -1,678 +1,817 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Generar una página web completa en…</title>
+</head>
+<body>
 <style>
 *{box-sizing:border-box}
 html,body{width:100%;margin:0;padding:0;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 
-/* TIPOGRAFÍA */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root{
   --bg-main:#050508;
-  --bg-elevated:#0d0d13;
-  --accent:#6c3bff;
-  --accent-soft:rgba(108,59,255,0.18);
-  --accent-strong:#8b5bff;
-  --text-main:#f7f7ff;
-  --text-muted:#b4b4c8;
-  --border-subtle:#262636;
-  --card-bg:#0f0f17;
-  --nav-bg:#ffffff;
-  --nav-text:#111111;
-  --shadow-soft:0 10px 25px rgba(0,0,0,0.15);
+  --bg-alt:#0d0d12;
+  --bg-light:#f5f5f7;
+  --text-main:#f9f9ff;
+  --text-muted:#b5b5c8;
+  --accent:#7b3aed;
+  --accent-soft:rgba(123,58,237,0.15);
+  --accent-dark:#4c23b5;
+  --border-subtle:#292938;
+  --shadow-soft:0 14px 40px rgba(0,0,0,0.45);
   --radius-lg:18px;
   --radius-pill:999px;
-  --container-max:1160px;
-  --transition-fast:0.2s ease;
+  --transition-fast:0.22s ease-out;
 }
 
 body{
   font-family:'Montserrat',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg-main);
+  background:radial-gradient(circle at top,#111122 0,#050508 45%,#010102 100%);
   color:var(--text-main);
-  line-height:1.5;
+  line-height:1.6;
   font-size:clamp(14px,3.6vw,16px);
 }
 
-h1,h2,h3,h4{
-  margin:0 0 8px;
-  font-weight:600;
-  letter-spacing:-0.02em;
-}
-
-h1{
-  font-size:clamp(24px,6vw,40px);
-}
-
-h2{
-  font-size:clamp(20px,4.5vw,32px);
-}
-
-h3{
-  font-size:18px;
-}
-
-/* LAYOUT BASE */
 .page{
-  width:100%;
+  min-height:100vh;
 }
 
+/* Layout helpers */
 .section{
-  padding:32px 16px;
+  padding:56px 16px;
 }
-
-.section-alt{
-  background:var(--bg-elevated);
-}
-
 .container{
-  max-width:var(--container-max);
+  max-width:1160px;
   margin:0 auto;
 }
 
-/* NAVBAR STICKY */
+/* Typography */
+h1,h2,h3,h4{
+  margin:0;
+  font-weight:600;
+  color:var(--text-main);
+}
+h1{
+  font-size:clamp(24px,6vw,40px);
+  letter-spacing:-0.02em;
+}
+h2{
+  font-size:clamp(20px,5vw,32px);
+  margin-bottom:20px;
+}
+h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+p{
+  margin:0;
+  color:var(--text-muted);
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 24px;
+  min-height:48px;
+  border-radius:var(--radius-pill);
+  border:1px solid transparent;
+  font-weight:500;
+  font-size:14px;
+  letter-spacing:0.02em;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color var(--transition-fast),color var(--transition-fast),box-shadow var(--transition-fast),transform var(--transition-fast),border-color var(--transition-fast);
+  white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:#fff;
+  box-shadow:0 18px 45px rgba(12,4,40,0.75);
+}
+.btn-primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 22px 55px rgba(12,4,40,0.9);
+}
+.btn-outline{
+  background:rgba(255,255,255,0.02);
+  border-color:rgba(255,255,255,0.08);
+  color:var(--text-main);
+}
+.btn-outline:hover{
+  background:rgba(255,255,255,0.06);
+}
+
+/* Sticky Navbar */
 .navbar{
   position:sticky;
   top:0;
   z-index:20;
-  background:var(--nav-bg);
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  background:#ffffff;
+  color:#050508;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
-
-.navbar-inner{
-  max-width:var(--container-max);
+.nav-inner{
+  max-width:1160px;
   margin:0 auto;
-  padding:10px 16px;
+  padding:12px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
 }
-
-.nav-logo{
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
   font-weight:700;
-  font-size:18px;
-  letter-spacing:0.08em;
+  letter-spacing:0.12em;
+  font-size:14px;
   text-transform:uppercase;
-  color:var(--nav-text);
 }
-
+.nav-brand-mark{
+  width:26px;
+  height:26px;
+  border-radius:10px;
+  background:radial-gradient(circle at 20% 0,#ffffff 0,#e3d9ff 40%,#7b3aed 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  color:#050508;
+}
 .nav-menu{
   display:none;
+  align-items:center;
+  gap:24px;
+  font-size:14px;
 }
-
-.nav-cta{
-  padding:10px 18px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(0,0,0,0.06);
-  background:linear-gradient(135deg,var(--accent),var(--accent-strong));
-  color:#fff;
-  font-size:13px;
-  font-weight:600;
+.nav-menu a{
   text-decoration:none;
-  white-space:nowrap;
-  box-shadow:0 6px 18px rgba(65,40,172,0.35);
+  color:#111111;
+  font-weight:500;
+  position:relative;
+  padding-bottom:2px;
+}
+.nav-menu a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:width var(--transition-fast);
+}
+.nav-menu a:hover::after{
+  width:100%;
+}
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.nav-cta{
+  border-radius:var(--radius-pill);
+  padding:0 18px;
+  min-height:40px;
+  font-size:13px;
+}
+.nav-cta-primary{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+}
+.nav-cta-primary:hover{
+  background:var(--accent-dark);
+}
+.nav-burger{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f6f6f8;
+}
+.nav-burger-lines{
+  width:16px;
+  height:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.nav-burger-lines span{
+  height:2px;
+  border-radius:10px;
+  background:#111;
 }
 
 /* HERO */
 .hero{
-  background:radial-gradient(circle at top,var(--accent-soft) 0,transparent 55%),var(--bg-main);
-  padding-top:28px;
+  padding-top:32px;
+  padding-bottom:64px;
 }
-
-.hero-grid{
+.hero-inner{
   display:flex;
   flex-direction:column;
-  gap:24px;
+  gap:32px;
 }
-
-.hero-badge{
+.badge{
   display:inline-flex;
   align-items:center;
   gap:8px;
   padding:4px 10px;
   border-radius:var(--radius-pill);
-  background:rgba(255,255,255,0.02);
+  background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.06);
-  color:var(--text-muted);
   font-size:11px;
-  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  margin-bottom:14px;
+  color:var(--text-muted);
 }
-
-.hero-badge-dot{
+.badge-dot{
   width:8px;
   height:8px;
   border-radius:50%;
   background:var(--accent);
-  box-shadow:0 0 0 4px rgba(108,59,255,0.35);
+  box-shadow:0 0 0 4px var(--accent-soft);
 }
-
 .hero-title{
-  margin-bottom:12px;
+  margin-bottom:16px;
 }
-
-.hero-title span{
-  color:var(--accent-strong);
-}
-
 .hero-subtitle{
-  font-size:14px;
-  color:var(--text-muted);
-  margin-bottom:18px;
+  font-size:16px;
+  font-weight:500;
+  color:#d7d7ea;
+  margin-bottom:10px;
 }
-
-.hero-copy{
-  font-size:14px;
-  color:var(--text-muted);
+.hero-text{
+  max-width:32rem;
   margin-bottom:20px;
 }
-
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  align-items:center;
+  margin-bottom:18px;
 }
-
-.btn-primary{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 22px;
-  border-radius:var(--radius-pill);
-  border:none;
-  outline:none;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--accent),var(--accent-strong));
-  color:#fff;
-  font-weight:600;
-  font-size:14px;
-  text-decoration:none;
-  box-shadow:0 10px 24px rgba(31,17,93,0.6);
-}
-
-.btn-secondary{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  padding:0 18px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(255,255,255,0.02);
-  color:var(--text-muted);
-  font-size:13px;
-  text-decoration:none;
-}
-
 .hero-meta{
-  margin-top:18px;
   display:flex;
   flex-wrap:wrap;
-  gap:18px;
+  gap:16px;
   font-size:11px;
   color:var(--text-muted);
 }
-
-.hero-meta strong{
-  color:var(--text-main);
+.hero-meta-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
-
-.hero-image-wrapper{
-  background:linear-gradient(135deg,#141420,#08080e);
+.hero-meta-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.hero-visual{
   border-radius:24px;
-  padding:10px;
-  border:1px solid rgba(255,255,255,0.04);
-  box-shadow:0 20px 45px rgba(0,0,0,0.7);
+  background:radial-gradient(circle at top left,#2a2345 0, #110b1f 40%, #050508 100%);
+  padding:14px;
+  box-shadow:var(--shadow-soft);
 }
-
-.hero-image-inner{
-  border-radius:16px;
+.hero-visual-frame{
+  border-radius:18px;
   overflow:hidden;
+  border:1px solid rgba(255,255,255,0.04);
+  background:#090812;
+}
+.hero-visual-header{
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.hero-visual-dots{
+  display:flex;
+  gap:6px;
+}
+.hero-visual-dots span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.12);
+}
+.hero-visual-pill{
+  padding:6px 10px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  font-size:10px;
+  color:var(--text-muted);
+}
+.hero-visual-body{
+  padding:12px;
+}
+.hero-visual-main{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
-/* SERVICIOS */
+/* Sections titles */
 .section-header{
-  margin-bottom:20px;
+  margin-bottom:24px;
 }
-
 .section-kicker{
   font-size:11px;
-  letter-spacing:0.14em;
   text-transform:uppercase;
-  color:var(--accent-strong);
+  letter-spacing:0.18em;
+  color:var(--accent);
   margin-bottom:6px;
 }
-
 .section-description{
-  font-size:14px;
-  color:var(--text-muted);
-  margin-top:4px;
+  max-width:520px;
 }
 
+/* Servicios */
+.services{
+  background:radial-gradient(circle at top,#151521 0,#050508 55%);
+}
 .services-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:16px;
-}
-
-.card{
-  background:var(--card-bg);
-  border-radius:var(--radius-lg);
-  padding:16px;
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-  transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background var(--transition-fast);
-}
-
-.card img{
-  border-radius:12px;
-  margin-bottom:12px;
-}
-
-.card-title{
-  font-size:16px;
-  margin-bottom:6px;
-}
-
-.card-text{
-  font-size:13px;
-  color:var(--text-muted);
-}
-
-/* QUIENES SOMOS */
-.about-grid{
-  display:flex;
-  flex-direction:column;
   gap:18px;
 }
-
-.about-photo{
-  border-radius:22px;
+.service-card{
+  border-radius:var(--radius-lg);
+  padding:18px;
+  background:rgba(6,6,12,0.96);
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background var(--transition-fast);
+}
+.service-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 55px rgba(0,0,0,0.7);
+  border-color:var(--accent-soft);
+  background:radial-gradient(circle at top left,rgba(123,58,237,0.32),rgba(4,4,10,0.98));
+}
+.service-media{
+  border-radius:14px;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,0.06);
-  box-shadow:0 18px 40px rgba(0,0,0,0.7);
+  margin-bottom:2px;
 }
-
-.about-tag{
+.service-label{
   display:inline-flex;
-  padding:3px 10px;
-  border-radius:var(--radius-pill);
-  background:rgba(255,255,255,0.02);
-  border:1px solid rgba(255,255,255,0.08);
+  padding:4px 10px;
+  border-radius:999px;
   font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  background:rgba(255,255,255,0.04);
   color:var(--text-muted);
-  margin-bottom:8px;
 }
 
+/* Quienes somos */
+.about{
+  background:var(--bg-alt);
+}
+.about-inner{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,0.04);
+  padding:22px;
+  background:radial-gradient(circle at top left,#1a1328 0,#07060c 55%);
+  box-shadow:0 20px 45px rgba(0,0,0,0.6);
+}
+.about-media{
+  border-radius:18px;
+  overflow:hidden;
+}
+.about-text{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 .about-names{
   font-weight:600;
-  margin-bottom:4px;
+  color:#ffffff;
 }
-
-.about-roles{
+.about-role{
   font-size:13px;
-  color:var(--accent-strong);
-  margin-bottom:10px;
+  color:var(--accent-soft);
 }
 
-.about-text{
-  font-size:14px;
-  color:var(--text-muted);
+/* Testimonios */
+.testimonials{
+  background:var(--bg-main);
 }
-
-/* TESTIMONIOS - CARRUSEL */
+.testimonials-track-wrapper{
+  margin-top:8px;
+}
 .testimonials-track{
   display:flex;
   gap:14px;
   overflow-x:auto;
-  padding-bottom:4px;
+  padding-bottom:8px;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
 }
-
 .testimonials-track::-webkit-scrollbar{
   height:4px;
 }
-
 .testimonials-track::-webkit-scrollbar-track{
-  background:transparent;
+  background:rgba(255,255,255,0.02);
 }
-
 .testimonials-track::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.15);
   border-radius:999px;
 }
-
 .testimonial-card{
-  min-width:260px;
-  max-width:280px;
+  flex:0 0 82%;
+  max-width:320px;
   scroll-snap-align:start;
+  border-radius:18px;
+  padding:18px;
+  background:rgba(8,8,16,0.98);
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 14px 32px rgba(0,0,0,0.55);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-
 .testimonial-name{
   font-weight:600;
-  margin-bottom:4px;
+  font-size:14px;
 }
-
+.testimonial-role{
+  font-size:12px;
+  color:var(--accent-soft);
+}
 .testimonial-text{
   font-size:13px;
-  color:var(--text-muted);
 }
 
-/* PASOS */
+/* Steps */
+.steps{
+  background:var(--bg-alt);
+}
 .steps-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:14px;
 }
-
-.step{
+.step-card{
+  border-radius:18px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:rgba(6,6,12,0.98);
   display:flex;
   gap:12px;
   align-items:flex-start;
 }
-
-.step-badge{
+.step-index{
   width:28px;
   height:28px;
-  border-radius:14px;
+  border-radius:12px;
   background:var(--accent-soft);
-  border:1px solid rgba(108,59,255,0.4);
+  color:var(--accent);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:13px;
   font-weight:600;
-  color:var(--accent-strong);
-}
-
-.step-content h3{
-  margin-bottom:4px;
-}
-
-.step-content p{
   font-size:13px;
-  color:var(--text-muted);
 }
 
-/* GALERÍA */
+/* Gallery */
+.gallery{
+  background:var(--bg-main);
+}
 .gallery-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:10px;
 }
-
 .gallery-item{
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.05);
+  background:#0a0a12;
+}
+.gallery-item--wide{
+  grid-column:span 2;
 }
 
-/* CÓMO LLEGAR Y AGENDAR */
-.map-placeholder{
-  margin-top:14px;
-  border-radius:18px;
-  border:1px dashed rgba(255,255,255,0.18);
-  padding:18px;
+/* Contact / Cómo llegar */
+.contact{
+  background:var(--bg-alt);
+}
+.contact-inner{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--text-muted);
-  font-size:13px;
-  text-align:center;
+  flex-direction:column;
+  gap:20px;
 }
-
-/* CTA FINAL */
-.final-cta{
-  text-align:center;
+.contact-main{
+  border-radius:22px;
+  padding:22px;
+  background:radial-gradient(circle at top left,#231c3a 0,#050508 60%);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 20px 45px rgba(0,0,0,0.7);
 }
-
-.final-cta p{
-  color:var(--text-muted);
-  margin:8px 0 16px;
-}
-
-/* FOOTER */
-.footer{
-  background:#f7f7fb;
-  color:#222;
-  padding:24px 16px 32px;
-}
-
-.footer-inner{
-  max-width:var(--container-max);
-  margin:0 auto;
+.contact-map{
+  margin-top:18px;
+  border-radius:18px;
+  border:1px dashed rgba(255,255,255,0.16);
+  padding:14px;
+  background:rgba(0,0,0,0.35);
   display:flex;
   flex-direction:column;
   gap:10px;
+}
+.contact-map-placeholder{
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.09);
+  background:#050508;
+  padding:18px;
+  text-align:center;
+  font-size:13px;
+  color:var(--text-muted);
+}
+
+/* Footer */
+.footer{
+  background:#fafafa;
+  color:#111;
+  padding:28px 16px 24px;
+}
+.footer-inner{
+  max-width:1160px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
   font-size:13px;
 }
-
+.footer-top{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 .footer-brand{
-  font-weight:600;
-  letter-spacing:0.12em;
+  font-weight:700;
+  letter-spacing:0.16em;
   text-transform:uppercase;
+  font-size:12px;
 }
-
 .footer-meta{
-  color:#666;
+  color:#555;
+}
+.footer-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:10px;
+  color:#777;
 }
 
-/* HOVERS (desktop only) */
-@media (hover:hover){
-  .btn-primary:hover{
-    filter:brightness(1.05);
-    transform:translateY(-1px);
-    box-shadow:0 14px 30px rgba(31,17,93,0.7);
-  }
-  .btn-secondary:hover{
-    background:rgba(255,255,255,0.06);
-  }
-  .nav-cta:hover{
-    filter:brightness(1.03);
-  }
-  .card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 16px 40px rgba(0,0,0,0.65);
-    border-color:rgba(108,59,255,0.45);
-    background:linear-gradient(145deg,rgba(30,24,54,0.9),rgba(12,11,21,0.96));
-  }
-}
-
-/* TABLET */
+/* Desktop ≥ 768px */
 @media (min-width:768px){
   .section{
-    padding:44px 24px;
+    padding:70px 24px;
   }
-  .navbar-inner{
-    padding-inline:24px;
+  .nav-inner{
+    padding:10px 24px;
   }
-  .hero-grid{
+  .hero{
+    padding-top:40px;
+    padding-bottom:80px;
+  }
+  .hero-inner{
     flex-direction:row;
     align-items:center;
-    gap:32px;
+    gap:40px;
   }
   .hero-left,.hero-right{
     flex:1;
   }
-  .gallery-grid{
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-  }
   .services-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .testimonial-card{
+    flex:0 0 320px;
   }
   .steps-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
-}
-
-/* DESKTOP */
-@media (min-width:1024px){
-  .section{
-    padding:60px 32px;
+  .gallery-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
-  .navbar-inner{
-    padding:12px 32px;
+  .gallery-item--wide{
+    grid-column:span 2;
   }
-  .nav-menu{
-    display:flex;
-    align-items:center;
-    gap:24px;
-    font-size:13px;
-    color:var(--nav-text);
-  }
-  .nav-menu a{
-    text-decoration:none;
-    color:inherit;
-    position:relative;
-    padding-bottom:4px;
-  }
-  .nav-menu a::after{
-    content:'';
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:0;
-    height:2px;
-    background:var(--accent);
-    transition:width var(--transition-fast);
-  }
-  .nav-menu a:hover::after{
-    width:100%;
-  }
-  .hero-grid{
-    gap:52px;
-  }
-  .hero-subtitle,.hero-copy{
-    max-width:480px;
-  }
-  .about-grid{
+  .about-inner{
     flex-direction:row;
     align-items:center;
   }
-  .about-photo{
+  .about-media,.about-text{
     flex:1;
   }
-  .about-content{
-    flex:1;
-    padding-left:32px;
+}
+
+/* Desktop ≥ 1024px */
+@media (min-width:1024px){
+  .nav-menu{
+    display:flex;
   }
-  .gallery-grid{
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
+  .nav-burger{
+    display:none;
+  }
+  .hero-inner{
+    gap:60px;
+  }
+  .hero-actions{
+    gap:14px;
+  }
+  .services-grid{
+    gap:20px;
+  }
+  .steps-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  .contact-inner{
+    flex-direction:row;
+    align-items:stretch;
+    gap:26px;
+  }
+  .contact-main{
+    flex:2;
+  }
+  .contact-side{
+    flex:1;
+  }
+  .footer-inner{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
   }
 }
 </style>
 
-<div class="page">
-
-  <!-- NAVBAR -->
+<body class="page">
+  <!-- NAVBAR STICKY -->
   <header class="navbar">
-    <div class="navbar-inner">
-      <div class="nav-logo">Pixa ADS</div>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-brand-mark">P</div>
+        <span>Pixa ADS</span>
+      </div>
       <nav class="nav-menu">
         <a href="#home">Home</a>
         <a href="#servicios">Servicios</a>
         <a href="#clientas">Clientas</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a href="#contacto" class="nav-cta">Contacto</a>
+      <div class="nav-actions">
+        <a href="#contacto" class="btn nav-cta nav-cta-primary">Contacto</a>
+        <button class="nav-burger" aria-label="Menu">
+          <div class="nav-burger-lines">
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="section hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-left">
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            <span>Ads pensados para marcas que quieren crecer en serio</span>
+  <!-- HERO / HOME -->
+  <main id="home" class="hero section">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Meta Ads + Automatización</span>
+        </div>
+        <h1 class="hero-title">Publicidad + Sistema de atención automática</h1>
+        <h3 class="hero-subtitle">Llevamos tráfico calificado y lo convertimos en clientas reales, incluso mientras dormís.</h3>
+        <p class="hero-text">
+          En Pixa ADS combinamos campañas de alto rendimiento con flujos de atención automática para que cada mensaje sea una oportunidad de venta, no una notificación más.
+        </p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary">Contacto</a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Gestión completa de anuncios</span>
           </div>
-          <h1 class="hero-title">Publicidad + Sistema de atención automática <span>para transformar visitas en clientas</span></h1>
-          <p class="hero-subtitle">Estrategias de anuncios y automatizaciones que atienden a tus clientas 24/7, incluso cuando tu equipo está offline.</p>
-          <p class="hero-copy">En Pixa ADS diseñamos campañas, embudos y flujos de atención automáticos para que cada conversación termine en una reserva, venta o consulta calificada.</p>
-          <div class="hero-actions">
-            <a href="#contacto" class="btn-primary">Contacto</a>
-            <a href="#servicios" class="btn-secondary">Ver servicios</a>
-          </div>
-          <div class="hero-meta">
-            <div><strong>+120</strong> campañas activas</div>
-            <div><strong>4.8/5</strong> satisfacción promedio</div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Automatizaciones en WhatsApp e Instagram</span>
           </div>
         </div>
-        <div class="hero-right">
-          <div class="hero-image-wrapper">
-            <div class="hero-image-inner">
-              <img src="image-placeholder.jpg" alt="Panel de campañas publicitarias y flujo de mensajes automáticos">
+      </div>
+      <div class="hero-right hero-visual">
+        <div class="hero-visual-frame">
+          <div class="hero-visual-header">
+            <div class="hero-visual-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="hero-visual-pill">Panel de resultados Pixa ADS</div>
+          </div>
+          <div class="hero-visual-body">
+            <div class="hero-visual-main">
+              <img src="image-placeholder.jpg" alt="Panel profesional de campañas y automatizaciones">
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <!-- SERVICIOS -->
-  <section id="servicios" class="section section-alt">
+  <section id="servicios" class="services section">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Servicios</div>
-        <h2>Lo que hacemos para que tu marca no pase desapercibida</h2>
-        <p class="section-description">Combinamos anuncios estratégicos, automatización y posicionamiento de marca para que tu negocio sea la primera opción de tus clientas ideales.</p>
+        <p class="section-kicker">Servicios</p>
+        <h2>Lo que hacemos para que tu marca venda todos los días</h2>
+        <p class="section-description">
+          Diseñamos un ecosistema completo: anuncios que llaman la atención, automatizaciones que responden al instante y una presencia de marca consistente en cada punto de contacto.
+        </p>
       </div>
-
       <div class="services-grid">
-        <article class="card">
-          <img src="image-placeholder.jpg" alt="Gestión profesional de campañas publicitarias">
-          <h3 class="card-title">Publicidad</h3>
-          <p class="card-text">Planificación, lanzamiento y optimización de campañas en Meta Ads, Google y otras plataformas para generar tráfico constante y de calidad.</p>
+        <article class="service-card">
+          <div class="service-media">
+            <img src="image-placeholder.jpg" alt="Publicidad en redes sociales">
+          </div>
+          <span class="service-label">Publicidad</span>
+          <h3>Publicidad de alto rendimiento</h3>
+          <p>
+            Campañas en Meta Ads (Facebook e Instagram) pensadas para atraer a las personas correctas, con segmentación precisa y mensajes que conectan con tus clientas ideales.
+          </p>
         </article>
 
-        <article class="card">
-          <img src="image-placeholder.jpg" alt="Sistema de atención automática por chat">
-          <h3 class="card-title">Atención Automática</h3>
-          <p class="card-text">Flujos de chat automatizados que responden consultas, califican interesadas y derivan a tu equipo solo cuando hace falta.</p>
+        <article class="service-card">
+          <div class="service-media">
+            <img src="image-placeholder.jpg" alt="Atención automática en WhatsApp y redes">
+          </div>
+          <span class="service-label">Atención automática</span>
+          <h3>Sistema de atención automática</h3>
+          <p>
+            Flujos automáticos en WhatsApp e Instagram para responder consultas, calificar leads y derivar a ventas sin que tengas que estar pendiente del celular todo el día.
+          </p>
         </article>
 
-        <article class="card">
-          <img src="image-placeholder.jpg" alt="Posicionamiento de marca en redes">
-          <h3 class="card-title">Posicionamiento de Marca</h3>
-          <p class="card-text">Estrategia visual y de mensajes para que tu marca tenga una voz clara, coherente y reconocible en todos los puntos de contacto.</p>
-        </article>
-
-        <article class="card">
-          <img src="image-placeholder.jpg" alt="Optimización continua de resultados">
-          <h3 class="card-title">Optimización continua</h3>
-          <p class="card-text">Revisión constante de métricas, ajustes de anuncios y mejoras en la experiencia de atención para sostener resultados en el tiempo.</p>
+        <article class="service-card">
+          <div class="service-media">
+            <img src="image-placeholder.jpg" alt="Posicionamiento y branding de marca">
+          </div>
+          <span class="service-label">Posicionamiento</span>
+          <h3>Posicionamiento de marca</h3>
+          <p>
+            Estrategia de contenido, mensajes y creatividades para que tu marca se vea profesional, coherente y memorable cada vez que aparezca frente a tu audiencia.
+          </p>
         </article>
       </div>
     </div>
   </section>
 
   <!-- QUIENES SOMOS -->
-  <section class="section" id="clientas">
+  <section class="about section">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Quienes somos</div>
-        <h2>Cami y Juli al frente de tu crecimiento</h2>
-        <p class="section-description">Un dúo estratégico con mirada creativa y obsesión por los números que importan: reservas, ventas y tiempo liberado para tu equipo.</p>
+        <p class="section-kicker">Quienes somos</p>
+        <h2>Un equipo pequeño, obsesionado con tus resultados</h2>
       </div>
-
-      <div class="about-grid">
-        <div class="about-photo">
-          <img src="image-placeholder.jpg" alt="Cami y Juli Fernandez trabajando en una estrategia de marketing">
+      <div class="about-inner">
+        <div class="about-media">
+          <img src="image-placeholder.jpg" alt="Cami y Juli, equipo de Pixa ADS">
         </div>
-        <div class="about-content">
-          <div class="about-tag">Equipo Pixa ADS</div>
-          <div class="about-names">Cami y Juli Fernandez</div>
-          <div class="about-roles">Especialistas en marketing, publicidad y sistemas de atención automática</div>
-          <p class="about-text">
-            Creemos que la publicidad solo tiene sentido cuando está conectada a un sistema que atiende, responde y guía a tus clientas hasta la compra.
+        <div class="about-text">
+          <p class="about-names">Cami y Juli Fernandez</p>
+          <p class="about-role">Especialistas en marketing digital, publicidad y automatización de atención</p>
+          <p>
+            Creamos Pixa ADS para acompañar marcas que buscan dar un salto profesional sin perder su esencia. Trabajamos cerca de vos,
+            traduciendo tus objetivos en campañas claras, sistemas de atención ordenados y procesos que puedas sostener en el tiempo.
           </p>
-          <p class="about-text">
-            Por eso combinamos estrategia, creatividad y automatización para diseñar experiencias completas: desde el primer anuncio hasta el mensaje de confirmación de compra o reserva. Trabajamos con marcas que valoran el detalle, la prolijidad y una comunicación cercana, pero profesional.
+          <p>
+            Creemos en los datos, pero también en las relaciones: cada anuncio, cada mensaje automático y cada pieza de contenido está diseñada
+            para que tus clientas se sientan escuchadas, cuidadas y seguras de elegirte una y otra vez.
           </p>
         </div>
       </div>
@@ -680,158 +819,203 @@ h3{
   </section>
 
   <!-- TESTIMONIOS -->
-  <section class="section section-alt">
+  <section id="clientas" class="testimonials section">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Testimonios</div>
-        <h2>Marcas que ya confían en Pixa ADS</h2>
-        <p class="section-description">Algunas de las experiencias de clientas que transformaron su flujo de consultas y ventas con nuestro sistema.</p>
+        <p class="section-kicker">Clientas</p>
+        <h2>Lo que dicen las marcas que ya trabajan con Pixa ADS</h2>
+        <p class="section-description">
+          Testeamos, medimos y mejoramos de manera constante. Estos son algunos de los resultados y experiencias que nos comparten nuestras clientas.
+        </p>
       </div>
+      <div class="testimonials-track-wrapper">
+        <div class="testimonials-track">
+          <article class="testimonial-card">
+            <div>
+              <p class="testimonial-name">Belén, Estudio de belleza</p>
+              <p class="testimonial-role">Meta Ads + automatización WhatsApp</p>
+            </div>
+            <p class="testimonial-text">
+              Antes respondía mensajes todo el día y aun así perdía turnos. Hoy el sistema organiza las consultas, envía recordatorios y solo me encargo de atender. Nunca había tenido la agenda tan llena.
+            </p>
+          </article>
 
-      <div class="testimonials-track">
-        <article class="card testimonial-card">
-          <h3 class="testimonial-name">Sofía, estudio de belleza</h3>
-          <p class="testimonial-text">Pasamos de responder mensajes todo el día a tener un sistema que agenda turnos solo y filtra consultas. La inversión en anuncios se paga sola.</p>
-        </article>
+          <article class="testimonial-card">
+            <div>
+              <p class="testimonial-name">Mariana, Centro de estética</p>
+              <p class="testimonial-role">Campañas de captación local</p>
+            </div>
+            <p class="testimonial-text">
+              En el primer mes con Pixa ADS duplicamos la cantidad de consultas y bajó muchísimo el tiempo que tardo en responder. Lo mejor: ahora sé de dónde viene cada clienta y qué campaña funciona mejor.
+            </p>
+          </article>
 
-        <article class="card testimonial-card">
-          <h3 class="testimonial-name">Marina, tienda online de moda</h3>
-          <p class="testimonial-text">Ordenaron nuestras campañas, el funnel y la atención por WhatsApp. Hoy entendemos qué anuncio vende y cuál no en tiempo real.</p>
-        </article>
-
-        <article class="card testimonial-card">
-          <h3 class="testimonial-name">Carla, centro de estética</h3>
-          <p class="testimonial-text">El sistema automático responde dudas frecuentes y toma datos clave antes de derivar a mi equipo. Ganamos tiempo y profesionalismo.</p>
-        </article>
-
-        <article class="card testimonial-card">
-          <h3 class="testimonial-name">Valentina, marca de servicios</h3>
-          <p class="testimonial-text">Lo que más valoro es la claridad: reportes simples, decisiones basadas en datos y una comunicación muy humana.</p>
-        </article>
+          <article class="testimonial-card">
+            <div>
+              <p class="testimonial-name">Lucía, Marca de indumentaria</p>
+              <p class="testimonial-role">Estrategia de marca y remarketing</p>
+            </div>
+            <p class="testimonial-text">
+              Sentí que entendieron mi marca desde el día uno. La comunicación es súper clara y los reportes me ayudan a tomar decisiones sin adivinar. Mis ventas online crecieron y el proceso se siente mucho más ordenado.
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PASOS PARA LOGRAR RESULTADOS -->
-  <section class="section">
+  <section class="steps section">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Proceso</div>
-        <h2>Pasos para lograr resultados medibles</h2>
-        <p class="section-description">Un proceso claro, acompañado y sin tecnicismos innecesarios. Vos te enfocás en tu negocio, nosotras en hacer que lleguen las clientas correctas.</p>
+        <p class="section-kicker">Proceso</p>
+        <h2>Pasos para lograr resultados sostenibles</h2>
+        <p class="section-description">
+          No se trata solo de lanzar anuncios. Diseñamos un proceso que conecta lo que prometés en redes con la experiencia real de tus clientas.
+        </p>
       </div>
-
       <div class="steps-grid">
-        <div class="card step">
-          <div class="step-badge">1</div>
-          <div class="step-content">
+        <article class="step-card">
+          <div class="step-index">1</div>
+          <div>
             <h3>Contactanos</h3>
-            <p>Nos escribís y coordinamos una breve llamada para entender tu negocio, tu contexto actual y tus objetivos de crecimiento.</p>
+            <p>
+              Agendamos una llamada breve para entender tu negocio, tus objetivos y el punto en el que estás hoy con tu marca y tus canales digitales.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="card step">
-          <div class="step-badge">2</div>
-          <div class="step-content">
+        <article class="step-card">
+          <div class="step-index">2</div>
+          <div>
             <h3>Evaluación de tu marca</h3>
-            <p>Revisamos tu presencia digital, campañas actuales (si las hay) y la experiencia de atención que viven hoy tus clientas.</p>
+            <p>
+              Analizamos tu presencia actual, tu propuesta de valor y el recorrido de tus clientas: desde el primer anuncio hasta el mensaje final.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="card step">
-          <div class="step-badge">3</div>
-          <div class="step-content">
+        <article class="step-card">
+          <div class="step-index">3</div>
+          <div>
             <h3>Tratamiento adecuado</h3>
-            <p>Diseñamos la estrategia de anuncios y el sistema de atención automática que mejor se adapte al momento de tu marca.</p>
+            <p>
+              Diseñamos una estrategia de anuncios y automatizaciones a medida, definiendo mensajes, segmentación, flujos de atención y creatividades.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="card step">
-          <div class="step-badge">4</div>
-          <div class="step-content">
+        <article class="step-card">
+          <div class="step-index">4</div>
+          <div>
             <h3>Seguimiento</h3>
-            <p>Medimos resultados, optimizamos campañas y ajustamos mensajes para sostener y escalar los resultados en el tiempo.</p>
+            <p>
+              Medimos resultados, optimizamos campañas y ajustamos los flujos de atención para que tus números mejoren mes a mes, sin improvisar.
+            </p>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- GALERÍA DEL LOCAL -->
-  <section class="section section-alt">
+  <section class="gallery section">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Galería</div>
-        <h2>Un vistazo al universo Pixa ADS</h2>
-        <p class="section-description">Algunas escenas de nuestro día a día: planificación, análisis de resultados y creación de experiencias para tus futuras clientas.</p>
+        <p class="section-kicker">Galería</p>
+        <h2>Un vistazo a espacios y marcas con las que trabajamos</h2>
+        <p class="section-description">
+          Creamos entornos visuales coherentes: desde el local físico hasta las piezas digitales que ven tus futuras clientas en redes.
+        </p>
       </div>
-
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Reunión de planificación de campañas publicitarias">
+        <div class="gallery-item gallery-item--wide">
+          <img src="image-placeholder.jpg" alt="Vista general de local moderno">
         </div>
         <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Panel de métricas en pantalla">
+          <img src="image-placeholder.jpg" alt="Detalle de recepción del local">
         </div>
         <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Diseño de creatividades para anuncios">
+          <img src="image-placeholder.jpg" alt="Zona de atención a clientas">
         </div>
         <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Trabajo colaborativo en laptops">
+          <img src="image-placeholder.jpg" alt="Espacio de branding de la marca">
         </div>
         <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Detalle de espacio de trabajo moderno">
+          <img src="image-placeholder.jpg" alt="Cartelería y diseño interior del local">
         </div>
-        <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Revisión de resultados con clienta">
-        </div>
-        <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Pantalla con flujos de atención automática">
-        </div>
-        <div class="gallery-item">
-          <img src="image-placeholder.jpg" alt="Ambiente cálido de oficina creativa">
+        <div class="gallery-item gallery-item--wide">
+          <img src="image-placeholder.jpg" alt="Ambiente luminoso y cuidado del local">
         </div>
       </div>
     </div>
   </section>
 
   <!-- CÓMO LLEGAR Y AGENDAR -->
-  <section id="contacto" class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Agenda tu llamado</div>
-        <h2>Cómo llegar y agendar tu reunión con Pixa ADS</h2>
-        <p class="section-description">Trabajamos 100 % online, lo que nos permite acompañar marcas en diferentes ciudades y países. Coordinamos llamadas por videollamada o teléfono según lo que te resulte más cómodo.</p>
+  <section id="contacto" class="contact section">
+    <div class="container contact-inner">
+      <div class="contact-main">
+        <div class="section-header" style="margin-bottom:16px;">
+          <p class="section-kicker">Cómo llegar y agendar</p>
+          <h2>Agendemos tu primera reunión con Pixa ADS</h2>
+        </div>
+        <p>
+          Trabajamos de forma remota para marcas de distintas ciudades, pero nos tomamos en serio el vínculo con cada clienta.
+          En la llamada inicial revisamos tus objetivos, tu capacidad operativa y qué tanto podemos automatizar hoy sin perder cercanía.
+        </p>
+        <p style="margin-top:12px;">
+          Podés escribirnos para coordinar por WhatsApp o por correo. Te compartimos un breve formulario para que lleguemos a la reunión con todo el contexto listo.
+        </p>
+        <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;">
+          <a href="#contacto" class="btn btn-primary">Contacto</a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios antes de agendar</a>
+        </div>
+
+        <div class="contact-map">
+          <p style="font-size:13px;color:var(--text-muted);">
+            Si tenés un local físico, integramos campañas con ubicación y mapas para llevar tráfico directo a tu espacio.
+          </p>
+          <div class="contact-map-placeholder">
+            <span style="display:block;margin-bottom:6px;font-weight:500;color:#e0e0ff;">Mapa de referencia</span>
+            <span>Insertá aquí el embed de tu mapa o la captura de la ubicación de tu local.</span>
+          </div>
+        </div>
       </div>
 
-      <p class="section-description" style="margin-bottom:14px;">
-        Completá tu consulta por el medio que prefieras y te vamos a responder con propuesta, disponibilidad y próximos pasos. Si tenés un local físico, también podemos integrar la estrategia digital con la experiencia en tu espacio.
-      </p>
-
-      <a href="#home" class="btn-primary" style="margin-bottom:16px;display:inline-flex;">Contacto</a>
-
-      <div class="map-placeholder">
-        Espacio para mapa o referencia de ubicación. Podés reemplazar este bloque con un mapa embebido o una captura de tu local.
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="section section-alt">
-    <div class="container final-cta">
-      <h2>Lista para que tu atención y tu publicidad hablen el mismo idioma</h2>
-      <p>Si querés dejar de responder mensajes desordenados y empezar a medir cada peso invertido en anuncios, este es el momento de ordenar tu sistema.</p>
-      <a href="#contacto" class="btn-primary">Quiero hablar con Pixa ADS</a>
+      <aside class="contact-side">
+        <div style="border-radius:18px;padding:18px;background:rgba(6,6,12,0.98);border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+          <h3>Datos de contacto</h3>
+          <p>
+            Correo: <strong>hola@pixaads.com</strong><br>
+            WhatsApp: <strong>+54 9 11 0000 0000</strong>
+          </p>
+          <p style="font-size:13px;">
+            Horario de atención:<br>
+            Lunes a viernes de 10 a 18 hs (AR).
+          </p>
+          <p style="font-size:13px;color:var(--text-muted);">
+            Respondemos todas las consultas en menos de 24 horas hábiles.
+          </p>
+        </div>
+      </aside>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-brand">Pixa ADS</div>
-      <div class="footer-meta">Publicidad + sistemas de atención automática para marcas que quieren crecer con foco y orden.</div>
-      <div class="footer-meta">© <span>2024</span> Pixa ADS. Todos los derechos reservados.</div>
+      <div class="footer-top">
+        <div class="footer-brand">Pixa ADS</div>
+        <p class="footer-meta">
+          Publicidad + sistemas de atención automática para marcas que quieren crecer con procesos claros y medibles.
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span>2024</span> Pixa ADS. Todos los derechos reservados.</span>
+        <span>Hecho en Argentina</span>
+      </div>
     </div>
   </footer>
-
-</div>
+</body>
+</body>
+</html>
