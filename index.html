@@ -5,7 +5,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <title>Generar una página web completa en…</title>
 </head>
-<body>
+
 <style>
 *{box-sizing:border-box}
 html,body{width:100%;margin:0;padding:0;overflow-x:hidden}
@@ -589,6 +589,29 @@ p{
   color:#777;
 }
 
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+}
+
+
 /* Desktop ≥ 768px */
 @media (min-width:768px){
   .section{
@@ -699,7 +722,7 @@ p{
   </header>
 
   <!-- HERO / HOME -->
-  <main id="home" class="hero section">
+  <main id="home" class="hero section reveal">
     <div class="container hero-inner">
       <div class="hero-left">
         <div class="badge">
@@ -745,7 +768,7 @@ p{
   </main>
 
   <!-- SERVICIOS -->
-  <section id="servicios" class="services section">
+  <section id="servicios" class="services section reveal">
     <div class="container">
       <div class="section-header">
         <p class="section-kicker">Servicios</p>
@@ -792,7 +815,7 @@ p{
   </section>
 
   <!-- QUIENES SOMOS -->
-  <section class="about section">
+  <section class="about section reveal">
     <div class="container">
       <div class="section-header">
         <p class="section-kicker">Quienes somos</p>
@@ -819,7 +842,7 @@ p{
   </section>
 
   <!-- TESTIMONIOS -->
-  <section id="clientas" class="testimonials section">
+  <section id="clientas" class="testimonials section reveal">
     <div class="container">
       <div class="section-header">
         <p class="section-kicker">Clientas</p>
@@ -865,7 +888,7 @@ p{
   </section>
 
   <!-- PASOS PARA LOGRAR RESULTADOS -->
-  <section class="steps section">
+  <section class="steps section reveal">
     <div class="container">
       <div class="section-header">
         <p class="section-kicker">Proceso</p>
@@ -875,7 +898,7 @@ p{
         </p>
       </div>
       <div class="steps-grid">
-        <article class="step-card">
+        <article class="step-card reveal">
           <div class="step-index">1</div>
           <div>
             <h3>Contactanos</h3>
@@ -885,7 +908,7 @@ p{
           </div>
         </article>
 
-        <article class="step-card">
+        <article class="step-card reveal">
           <div class="step-index">2</div>
           <div>
             <h3>Evaluación de tu marca</h3>
@@ -895,7 +918,7 @@ p{
           </div>
         </article>
 
-        <article class="step-card">
+        <article class="step-card reveal">
           <div class="step-index">3</div>
           <div>
             <h3>Tratamiento adecuado</h3>
@@ -905,7 +928,7 @@ p{
           </div>
         </article>
 
-        <article class="step-card">
+        <article class="step-card reveal">
           <div class="step-index">4</div>
           <div>
             <h3>Seguimiento</h3>
@@ -919,7 +942,7 @@ p{
   </section>
 
   <!-- GALERÍA DEL LOCAL -->
-  <section class="gallery section">
+  <section class="gallery section reveal">
     <div class="container">
       <div class="section-header">
         <p class="section-kicker">Galería</p>
@@ -928,23 +951,23 @@ p{
           Creamos entornos visuales coherentes: desde el local físico hasta las piezas digitales que ven tus futuras clientas en redes.
         </p>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid reveal">
         <div class="gallery-item gallery-item--wide">
           <img src="image-placeholder.jpg" alt="Vista general de local moderno">
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
           <img src="image-placeholder.jpg" alt="Detalle de recepción del local">
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
           <img src="image-placeholder.jpg" alt="Zona de atención a clientas">
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
           <img src="image-placeholder.jpg" alt="Espacio de branding de la marca">
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
           <img src="image-placeholder.jpg" alt="Cartelería y diseño interior del local">
         </div>
-        <div class="gallery-item gallery-item--wide">
+        <div class="gallery-item gallery-item--wide reveal">
           <img src="image-placeholder.jpg" alt="Ambiente luminoso y cuidado del local">
         </div>
       </div>
@@ -952,7 +975,7 @@ p{
   </section>
 
   <!-- CÓMO LLEGAR Y AGENDAR -->
-  <section id="contacto" class="contact section">
+  <section id="contacto" class="contact section reveal">
     <div class="container contact-inner">
       <div class="contact-main">
         <div class="section-header" style="margin-bottom:16px;">
@@ -1016,6 +1039,8 @@ p{
       </div>
     </div>
   </footer>
+  <script src="./js/IntersectionObserver.js"></script>
+
 </body>
-</body>
+
 </html>
